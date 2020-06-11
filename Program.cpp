@@ -5,7 +5,7 @@
 #define when_c_is_full 100
 using namespace std;
 
-// Ââîä ïàðàìåòðîâ îáîáùåííîé ôèãóðû èç ôàéëà
+// Ã‚Ã¢Ã®Ã¤ Ã¯Ã Ã°Ã Ã¬Ã¥Ã²Ã°Ã®Ã¢ Ã®Ã¡Ã®Ã¡Ã¹Ã¥Ã­Ã­Ã®Ã© Ã´Ã¨Ã£Ã³Ã°Ã» Ã¨Ã§ Ã´Ã Ã©Ã«Ã 
 void complex_In(ccomplex& c, ifstream& ifst)
 {
     ifst >> c.real >> c.imag;
@@ -14,6 +14,11 @@ void complex_Out(ccomplex& c, ofstream& ofst)
 {
     ofst << "It is a Complex: " << c.real << " + " << c.imag << "i" << endl;
     cout << "It is a Complex: " << c.real << " + " << c.imag << "i" << endl;
+}
+//Ð½Ð¾Ð²Ð°Ñ Ñ„ÑƒÐ½ÐºÑ†Ð¸Ñ Ð´Ð»Ñ Ð›Ð 2
+double real_complex(ccomplex& c)
+{
+    return sqrt(pow(c.imag, 2) + pow(c.real, 2));
 }
 void fractions_In(fractions& f, ifstream& ifst)
 {
@@ -24,12 +29,30 @@ void fractions_Out(fractions& f, ofstream& ofst)
     ofst << "It is a Fraction: " << f.x << "/" << f.y << endl;
     cout << "It is a Fraction: " << f.x << "/" << f.y << endl;
 }
-// Èíèöèàëèçàöèÿ êîíòåéíåðà
+//Ð½Ð¾Ð²Ð°Ñ Ñ„ÑƒÐ½ÐºÑ†Ð¸Ñ Ð´Ð»Ñ Ð›Ð 2
+double real_fractions(fractions& f)
+{
+    double result = (double)f.x;
+    return result / f.y;
+}
+double Real(shape& s)
+{
+    switch (s.k)
+    {
+    case shape::key::CCOMPLEX:
+        return real_complex(s.c);
+    case shape::key::FRACTIONS:
+        return real_fractions(s.f);
+    default:
+        return -1;
+    }
+}
+// ÃˆÃ­Ã¨Ã¶Ã¨Ã Ã«Ã¨Ã§Ã Ã¶Ã¨Ã¿ ÃªÃ®Ã­Ã²Ã¥Ã©Ã­Ã¥Ã°Ã 
 void container_Init(container& c)
 {
     c.len = 0;
 }
-// Î÷èñòêà êîíòåéíåðà îò ýëåìåíòîâ (îñâîáîæäåíèå ïàìÿòè)
+// ÃŽÃ·Ã¨Ã±Ã²ÃªÃ  ÃªÃ®Ã­Ã²Ã¥Ã©Ã­Ã¥Ã°Ã  Ã®Ã² Ã½Ã«Ã¥Ã¬Ã¥Ã­Ã²Ã®Ã¢ (Ã®Ã±Ã¢Ã®Ã¡Ã®Ã¦Ã¤Ã¥Ã­Ã¨Ã¥ Ã¯Ã Ã¬Ã¿Ã²Ã¨)
 void container_Clear(container& c)
 {
     for (int i = 0; i < c.len; i++)
@@ -74,7 +97,7 @@ void shape_Out(shape& s, ofstream& ofst)
         ofst << "Incorrect numbers!" << endl;
     }
 }
-// Ââîä ñîäåðæèìîãî êîíòåéíåðà èç óêàçàííîãî ïîòîêà
+// Ã‚Ã¢Ã®Ã¤ Ã±Ã®Ã¤Ã¥Ã°Ã¦Ã¨Ã¬Ã®Ã£Ã® ÃªÃ®Ã­Ã²Ã¥Ã©Ã­Ã¥Ã°Ã  Ã¨Ã§ Ã³ÃªÃ Ã§Ã Ã­Ã­Ã®Ã£Ã® Ã¯Ã®Ã²Ã®ÃªÃ 
 void container_In(container& c, ifstream& ifst)
 {
 
@@ -91,7 +114,7 @@ void container_In(container& c, ifstream& ifst)
         }
     }
 }
-// Âûâîä ñîäåðæèìîãî êîíòåéíåðà â óêàçàííûé ïîòîê
+// Ã‚Ã»Ã¢Ã®Ã¤ Ã±Ã®Ã¤Ã¥Ã°Ã¦Ã¨Ã¬Ã®Ã£Ã® ÃªÃ®Ã­Ã²Ã¥Ã©Ã­Ã¥Ã°Ã  Ã¢ Ã³ÃªÃ Ã§Ã Ã­Ã­Ã»Ã© Ã¯Ã®Ã²Ã®Ãª
 void container_Out(container& c, ofstream& ofst)
 {
     ofst << "Container contains " << c.len << " elements." << endl;
@@ -101,5 +124,7 @@ void container_Out(container& c, ofstream& ofst)
         ofst << i << ": ";
         cout << i << ": ";
         shape_Out(*(c.cont[i]), ofst);
+        ofst << "Real equivalent = " << Real(*c.cont[i]) << endl;
+        cout << "Real equivalent = " << Real(*c.cont[i]) << endl;
     }
 }
