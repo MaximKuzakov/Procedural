@@ -5,7 +5,7 @@
 #define when_c_is_full 100
 using namespace std;
 
-// ¬‚Ó‰ Ô‡‡ÏÂÚÓ‚ Ó·Ó·˘ÂÌÌÓÈ ÙË„Û˚ ËÁ Ù‡ÈÎ‡
+// √Ç√¢√Æ√§ √Ø√†√∞√†√¨√•√≤√∞√Æ√¢ √Æ√°√Æ√°√π√•√≠√≠√Æ√© √¥√®√£√≥√∞√ª √®√ß √¥√†√©√´√†
 void complex_In(ccomplex& c, ifstream& ifst)
 {
     ifst >> c.real >> c.imag;
@@ -21,15 +21,15 @@ void fractions_In(fractions& f, ifstream& ifst)
 }
 void fractions_Out(fractions& f, ofstream& ofst)
 {
-    ofst << "It is a Fraction: " << f.x << "/" << f.y << endl;
-    cout << "It is a Fraction: " << f.x << "/" << f.y << endl;
+    ofst << "It is a Fraction: " << f.x << "/" << f.y;
+    cout << "It is a Fraction: " << f.x << "/" << f.y;
 }
-// »ÌËˆË‡ÎËÁ‡ˆËˇ ÍÓÌÚÂÈÌÂ‡
+// √à√≠√®√∂√®√†√´√®√ß√†√∂√®√ø √™√Æ√≠√≤√•√©√≠√•√∞√†
 void container_Init(container& c)
 {
     c.len = 0;
 }
-// Œ˜ËÒÚÍ‡ ÍÓÌÚÂÈÌÂ‡ ÓÚ ˝ÎÂÏÂÌÚÓ‚ (ÓÒ‚Ó·ÓÊ‰ÂÌËÂ Ô‡ÏˇÚË)
+// √é√∑√®√±√≤√™√† √™√Æ√≠√≤√•√©√≠√•√∞√† √Æ√≤ √Ω√´√•√¨√•√≠√≤√Æ√¢ (√Æ√±√¢√Æ√°√Æ√¶√§√•√≠√®√• √Ø√†√¨√ø√≤√®)
 void container_Clear(container& c)
 {
     for (int i = 0; i < c.len; i++)
@@ -54,6 +54,16 @@ shape* shape_In(ifstream& ifst)
         sp = new shape;
         sp->k = shape::key::FRACTIONS;
         fractions_In(sp->f, ifst);
+        //—Å—á–∏—Ç—ã–≤–∞–Ω–∏–µ –∫–æ–ª–∏—á–µ—Å—Ç–≤–∞ —Å–∏–º–≤–æ–ª–æ–≤ –≤ —Å—Ç—Ä–æ–∫–µ –µ–¥–∏–Ω–∏—Ü—ã –∏–∑–º–µ—Ä–µ–Ω–∏—è
+        int amount;
+        ifst >> amount;
+        //—Å—á–∏—Ç—ã–≤–∞–Ω–∏–µ —Å—Ç—Ä–æ–∫–∏ –Ω–æ–≤–æ–≥–æ –ø–æ–ª—è - –µ–¥–∏–Ω–∏—Ü–∞ –∏–∑–º–µ—Ä–µ–Ω–∏—è
+        for (int i = 0; i < amount; i++)
+        {
+            char sb;
+            ifst >> sb;
+            sp->unit.push_back(sb);
+        }
         return sp;
     default:
         return 0;
@@ -69,12 +79,14 @@ void shape_Out(shape& s, ofstream& ofst)
         break;
     case shape::key::FRACTIONS:
         fractions_Out(s.f, ofst);
+        cout << s.unit << endl;
+        ofst << s.unit << endl;
         break;
     default:
         ofst << "Incorrect numbers!" << endl;
     }
 }
-// ¬‚Ó‰ ÒÓ‰ÂÊËÏÓ„Ó ÍÓÌÚÂÈÌÂ‡ ËÁ ÛÍ‡Á‡ÌÌÓ„Ó ÔÓÚÓÍ‡
+// √Ç√¢√Æ√§ √±√Æ√§√•√∞√¶√®√¨√Æ√£√Æ √™√Æ√≠√≤√•√©√≠√•√∞√† √®√ß √≥√™√†√ß√†√≠√≠√Æ√£√Æ √Ø√Æ√≤√Æ√™√†
 void container_In(container& c, ifstream& ifst)
 {
 
@@ -91,7 +103,7 @@ void container_In(container& c, ifstream& ifst)
         }
     }
 }
-// ¬˚‚Ó‰ ÒÓ‰ÂÊËÏÓ„Ó ÍÓÌÚÂÈÌÂ‡ ‚ ÛÍ‡Á‡ÌÌ˚È ÔÓÚÓÍ
+// √Ç√ª√¢√Æ√§ √±√Æ√§√•√∞√¶√®√¨√Æ√£√Æ √™√Æ√≠√≤√•√©√≠√•√∞√† √¢ √≥√™√†√ß√†√≠√≠√ª√© √Ø√Æ√≤√Æ√™
 void container_Out(container& c, ofstream& ofst)
 {
     ofst << "Container contains " << c.len << " elements." << endl;
