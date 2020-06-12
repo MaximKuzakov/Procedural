@@ -7,6 +7,7 @@ void container_Init(container& c);
 void container_Clear(container& c);
 void container_In(container& c, ifstream& ifst);
 void container_Out(container& c, ofstream& ofst);
+void Sort(container& c);
 
 int main(int argc, char* argv[])
 {
@@ -26,6 +27,7 @@ int main(int argc, char* argv[])
     container_Init(c);
     container_In(c, ifst);
     ofst << "Filled container. " << endl;
+    Sort(c);
     container_Out(c, ofst);
 
     container_Clear(c);
