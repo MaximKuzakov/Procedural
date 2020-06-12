@@ -5,7 +5,7 @@
 #define when_c_is_full 100
 using namespace std;
 
-// Ââîä ïàðàìåòðîâ îáîáùåííîé ôèãóðû èç ôàéëà
+// Ã‚Ã¢Ã®Ã¤ Ã¯Ã Ã°Ã Ã¬Ã¥Ã²Ã°Ã®Ã¢ Ã®Ã¡Ã®Ã¡Ã¹Ã¥Ã­Ã­Ã®Ã© Ã´Ã¨Ã£Ã³Ã°Ã» Ã¨Ã§ Ã´Ã Ã©Ã«Ã 
 void complex_In(ccomplex& c, ifstream& ifst)
 {
     ifst >> c.real >> c.imag;
@@ -24,12 +24,12 @@ void fractions_Out(fractions& f, ofstream& ofst)
     ofst << "It is a Fraction: " << f.x << "/" << f.y << endl;
     cout << "It is a Fraction: " << f.x << "/" << f.y << endl;
 }
-// Èíèöèàëèçàöèÿ êîíòåéíåðà
+// ÃˆÃ­Ã¨Ã¶Ã¨Ã Ã«Ã¨Ã§Ã Ã¶Ã¨Ã¿ ÃªÃ®Ã­Ã²Ã¥Ã©Ã­Ã¥Ã°Ã 
 void container_Init(container& c)
 {
     c.len = 0;
 }
-// Î÷èñòêà êîíòåéíåðà îò ýëåìåíòîâ (îñâîáîæäåíèå ïàìÿòè)
+// ÃŽÃ·Ã¨Ã±Ã²ÃªÃ  ÃªÃ®Ã­Ã²Ã¥Ã©Ã­Ã¥Ã°Ã  Ã®Ã² Ã½Ã«Ã¥Ã¬Ã¥Ã­Ã²Ã®Ã¢ (Ã®Ã±Ã¢Ã®Ã¡Ã®Ã¦Ã¤Ã¥Ã­Ã¨Ã¥ Ã¯Ã Ã¬Ã¿Ã²Ã¨)
 void container_Clear(container& c)
 {
     for (int i = 0; i < c.len; i++)
@@ -74,7 +74,7 @@ void shape_Out(shape& s, ofstream& ofst)
         ofst << "Incorrect numbers!" << endl;
     }
 }
-// Ââîä ñîäåðæèìîãî êîíòåéíåðà èç óêàçàííîãî ïîòîêà
+// Ã‚Ã¢Ã®Ã¤ Ã±Ã®Ã¤Ã¥Ã°Ã¦Ã¨Ã¬Ã®Ã£Ã® ÃªÃ®Ã­Ã²Ã¥Ã©Ã­Ã¥Ã°Ã  Ã¨Ã§ Ã³ÃªÃ Ã§Ã Ã­Ã­Ã®Ã£Ã® Ã¯Ã®Ã²Ã®ÃªÃ 
 void container_In(container& c, ifstream& ifst)
 {
 
@@ -91,7 +91,25 @@ void container_In(container& c, ifstream& ifst)
         }
     }
 }
-// Âûâîä ñîäåðæèìîãî êîíòåéíåðà â óêàçàííûé ïîòîê
+// Ð²Ñ‹Ð²Ð¾Ð´ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ð¿ÐµÑ€Ð²Ð¾Ð³Ð¾ ÐºÐ»ÑŽÑ‡Ð°
+void OutComplex(container& c, ofstream& ofst)
+{
+    ofst << "Only Complex." << endl;
+    cout << "Only Complex." << endl;
+    for (int i = 0; i < c.len; i++)
+    {
+        ofst << i << ": ";
+        cout << i << ": ";
+        if (c.cont[i]->k == shape::CCOMPLEX)
+            shape_Out(*(c.cont[i]), ofst);
+        else
+        {
+            ofst << endl;
+            cout << endl;
+        }
+    }
+}
+// Ã‚Ã»Ã¢Ã®Ã¤ Ã±Ã®Ã¤Ã¥Ã°Ã¦Ã¨Ã¬Ã®Ã£Ã® ÃªÃ®Ã­Ã²Ã¥Ã©Ã­Ã¥Ã°Ã  Ã¢ Ã³ÃªÃ Ã§Ã Ã­Ã­Ã»Ã© Ã¯Ã®Ã²Ã®Ãª
 void container_Out(container& c, ofstream& ofst)
 {
     ofst << "Container contains " << c.len << " elements." << endl;
