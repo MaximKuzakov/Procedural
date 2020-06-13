@@ -15,6 +15,11 @@ void complex_Out(ccomplex& c, ofstream& ofst)
     ofst << "It is a Complex: " << c.real << " + " << c.imag << "i" << endl;
     cout << "It is a Complex: " << c.real << " + " << c.imag << "i" << endl;
 }
+//новая функция для ЛР2
+double real_complex(ccomplex& c)
+{
+    return sqrt(pow(c.imag, 2) + pow(c.real, 2));
+}
 void fractions_In(fractions& f, ifstream& ifst)
 {
     ifst >> f.x >> f.y;
@@ -34,6 +39,24 @@ void coordinates_Out(polar_coordinates& p, ofstream& ofst)
     cout << "These are polar coordinates: " << p.angle << " (angle), " << p.distance << " (distance)" << endl;
 }
 // Èíèöèàëèçàöèÿ êîíòåéíåðà
+//новая функция для ЛР2
+double real_fractions(fractions& f)
+{
+    double result = (double)f.x;
+    return result / f.y;
+}
+double Real(shape& s)
+{
+    switch (s.k)
+    {
+    case shape::key::CCOMPLEX:
+        return real_complex(s.c);
+    case shape::key::FRACTIONS:
+        return real_fractions(s.f);
+    default:
+        return -1;
+    }
+}
 void container_Init(container& c)
 {
     c.len = 0;
@@ -130,5 +153,7 @@ void container_Out(container& c, ofstream& ofst)
         ofst << i << ": ";
         cout << i << ": ";
         shape_Out(*(c.cont[i]), ofst);
+        ofst << "Real equivalent = " << Real(*c.cont[i]) << endl;
+        cout << "Real equivalent = " << Real(*c.cont[i]) << endl;
     }
 }
