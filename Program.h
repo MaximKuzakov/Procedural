@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 struct ccomplex
 {
     double real, imag; // действительная и мнимая части

@@ -21,8 +21,8 @@ void fractions_In(fractions& f, ifstream& ifst)
 }
 void fractions_Out(fractions& f, ofstream& ofst)
 {
-    ofst << "It is a Fraction: " << f.x << "/" << f.y << endl;
-    cout << "It is a Fraction: " << f.x << "/" << f.y << endl;
+    ofst << "It is a Fraction: " << f.x << "/" << f.y;
+    cout << "It is a Fraction: " << f.x << "/" << f.y;
 }
 void coordinates_In(polar_coordinates& p, ifstream& ifst)
 {
@@ -63,6 +63,16 @@ shape* shape_In(ifstream& ifst)
         sp = new shape;
         sp->k = shape::key::FRACTIONS;
         fractions_In(sp->f, ifst);
+        //считывание количества символов в строке единицы измерения
+        int amount;
+        ifst >> amount;
+        //считывание строки нового поля - единица измерения
+        for (int i = 0; i < amount; i++)
+        {
+            char sb;
+            ifst >> sb;
+            sp->unit.push_back(sb);
+        }
         return sp;
     case 3:
         sp = new shape;
@@ -83,6 +93,8 @@ void shape_Out(shape& s, ofstream& ofst)
         break;
     case shape::key::FRACTIONS:
         fractions_Out(s.f, ofst);
+        cout << s.unit << endl;
+        ofst << s.unit << endl;
         break;
     case shape::key::POLAR:
         coordinates_Out(s.p, ofst);
