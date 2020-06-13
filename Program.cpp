@@ -161,6 +161,24 @@ void container_In(container& c, ifstream& ifst)
         }
     }
 }
+// вывод только первого ключа
+void OutComplex(container& c, ofstream& ofst)
+{
+    ofst << "Only Complex." << endl;
+    cout << "Only Complex." << endl;
+    for (int i = 0; i < c.len; i++)
+    {
+        ofst << i << ": ";
+        cout << i << ": ";
+        if (c.cont[i]->k == shape::CCOMPLEX)
+            shape_Out(*(c.cont[i]), ofst);
+        else
+        {
+            ofst << endl;
+            cout << endl;
+        }
+    }
+}
 // Âûâîä ñîäåðæèìîãî êîíòåéíåðà â óêàçàííûé ïîòîê
 void container_Out(container& c, ofstream& ofst)
 {

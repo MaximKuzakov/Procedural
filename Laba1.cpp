@@ -8,7 +8,7 @@ void container_Clear(container& c);
 void container_In(container& c, ifstream& ifst);
 void container_Out(container& c, ofstream& ofst);
 void Sort(container& c);
-
+void OutComplex(container& c, ofstream& ofst);
 int main(int argc, char* argv[])
 {
     if (argc != 3)
@@ -28,8 +28,8 @@ int main(int argc, char* argv[])
     container_In(c, ifst);
     ofst << "Filled container. " << endl;
     Sort(c);
-    container_Out(c, ofst);
-
+    //container_Out(c, ofst);
+    OutComplex(c, ofst);
     container_Clear(c);
     ofst << "Empty container. " << endl;
     container_Out(c, ofst);
