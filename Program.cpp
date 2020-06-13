@@ -53,6 +53,9 @@ double Real(shape& s)
         return real_complex(s.c);
     case shape::key::FRACTIONS:
         return real_fractions(s.f);
+    // нет способа привести полярные координаты к действительному числу
+    case shape::key::POLAR:
+        return 0.0;
     default:
         return -1;
     }
@@ -170,8 +173,13 @@ void OutComplex(container& c, ofstream& ofst)
     {
         ofst << i << ": ";
         cout << i << ": ";
+        //Включение вывода приведения чисел к действительному числу, при вызове функции OnlyComplex
         if (c.cont[i]->k == shape::CCOMPLEX)
+        {
             shape_Out(*(c.cont[i]), ofst);
+            ofst << "Real equivalent = " << Real(*c.cont[i]) << endl;
+            cout << "Real equivalent = " << Real(*c.cont[i]) << endl;
+        }
         else
         {
             ofst << endl;
