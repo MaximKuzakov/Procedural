@@ -1,7 +1,4 @@
 #include "Program.h"
-#include <fstream>
-#include <iostream>
-#include <cmath>
 #define when_c_is_full 100
 using namespace std;
 
