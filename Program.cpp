@@ -2,9 +2,8 @@
 #define when_c_is_full 100
 using namespace std;
 
-// Ââîä ïàðàìåòðîâ îáîáùåííîé ôèãóðû èç ôàéëà
-void complex_In(ccomplex& c, ifstream& ifst)
-{
+// Ввод параметров обобщенной фигуры из файла
+void complex_In(ccomplex& c, ifstream& ifst) {
     bool flag = 1;
     ifst >> c.real;
     if (ifst.fail())
@@ -23,18 +22,18 @@ void complex_In(ccomplex& c, ifstream& ifst)
     if (flag == 0) {
         cout << "\nError input comlex numbers" << endl;
 }
-void complex_Out(ccomplex& c, ofstream& ofst)
-{
+    
+void complex_Out(ccomplex& c, ofstream& ofst) {
     ofst << "It is a Complex: " << c.real << " + " << c.imag << "i" << endl;
     cout << "It is a Complex: " << c.real << " + " << c.imag << "i" << endl;
 }
+    
 //новая функция для ЛР2
-double real_complex(ccomplex& c)
-{
+double real_complex(ccomplex& c) {
     return sqrt(pow(c.imag, 2) + pow(c.real, 2));
 }
-void fractions_In(fractions& f, ifstream& ifst)
-{
+    
+void fractions_In(fractions& f, ifstream& ifst) {
     bool flag = 1;
     ifst >> f.x;
     if (ifst.fail())
@@ -54,13 +53,13 @@ void fractions_In(fractions& f, ifstream& ifst)
         cout << "\n\n\nError input fractions numbers" << endl << endl << endl;
     }
 }
-void fractions_Out(fractions& f, ofstream& ofst)
-{
+
+void fractions_Out(fractions& f, ofstream& ofst) {
     ofst << "It is a Fraction: " << f.x << "/" << f.y;
     cout << "It is a Fraction: " << f.x << "/" << f.y;
 }
-void coordinates_In(polar_coordinates& p, ifstream& ifst)
-{
+    
+void coordinates_In(polar_coordinates& p, ifstream& ifst) {
     bool flag = 1;
     ifst >> p.angle;
     if (ifst.fail())
@@ -69,6 +68,7 @@ void coordinates_In(polar_coordinates& p, ifstream& ifst)
         flag = 0;
     if (p.angle <= 0)
         flag = 0;
+    
     ifst >> p.distance;
     if (ifst.fail())
         flag = 0;
@@ -76,26 +76,27 @@ void coordinates_In(polar_coordinates& p, ifstream& ifst)
         flag = 0;
     if (p.distance <= 0)
         flag = 0;
+    
     if (flag == 0) {
         cout << "\n\n\nError input polar coordinates" << endl << endl << endl;
     }
 }
-void coordinates_Out(polar_coordinates& p, ofstream& ofst)
-{
-    ofst << "These are polar coordinates: " << p.angle << " (angle), " << p.distance << " (distance)" << endl;
-    cout << "These are polar coordinates: " << p.angle << " (angle), " << p.distance << " (distance)" << endl;
+    
+void coordinates_Out(polar_coordinates& p, ofstream& ofst) {
+    ofst << "These are polar coordinates: " << p.angle << " (angle), " 
+        << p.distance << " (distance)" << endl;
+    cout << "These are polar coordinates: " << p.angle << " (angle), " 
+        << p.distance << " (distance)" << endl;
 }
-// Èíèöèàëèçàöèÿ êîíòåéíåðà
+    
 //новая функция для ЛР2
-double real_fractions(fractions& f)
-{
+double real_fractions(fractions& f) {
     double result = (double)f.x;
     return result / f.y;
 }
-double Real(shape& s)
-{
-    switch (s.k)
-    {
+    
+double Real(shape& s) {
+    switch (s.k) {
     case shape::key::CCOMPLEX:
         return real_complex(s.c);
     case shape::key::FRACTIONS:
@@ -107,11 +108,12 @@ double Real(shape& s)
         return -1;
     }
 }
+    
 // Cравнение ключей двух программных объектов
-bool Compare(shape* first, shape* second)
-{
+bool Compare(shape* first, shape* second) {
     return Real(*first) < Real(*second);
 }
+    
 // Сортировка содержимого контейнера
 void Sort(container& c) {
     for (int i = 0; i < c.len - 1; i++) {
@@ -124,22 +126,21 @@ void Sort(container& c) {
         }
     }
 }
-// Èíèöèàëèçàöèÿ êîíòåéíåðà
-void container_Init(container& c)
-{
+    
+// Инициализация контейнера
+void container_Init(container& c) {
     c.len = 0;
 }
-// Î÷èñòêà êîíòåéíåðà îò ýëåìåíòîâ (îñâîáîæäåíèå ïàìÿòè)
-void container_Clear(container& c)
-{
+    
+// Очистка контейнера от элементов
+void container_Clear(container& c) {
     for (int i = 0; i < c.len; i++)
         delete c.cont[i];
     c.len = 0;
 }
 
 //----------------------------------------------------
-shape* shape_In(ifstream& ifst)
-{
+shape* shape_In(ifstream& ifst) {
     shape* sp;
     int k;
     ifst >> k;
@@ -158,8 +159,7 @@ shape* shape_In(ifstream& ifst)
         int amount;
         ifst >> amount;
         //считывание строки нового поля - единица измерения
-        for (int i = 0; i < amount; i++)
-        {
+        for (int i = 0; i < amount; i++) {
             char sb;
             ifst >> sb;
             sp->unit.push_back(sb);
@@ -175,10 +175,8 @@ shape* shape_In(ifstream& ifst)
     }
 }
 
-void shape_Out(shape& s, ofstream& ofst)
-{
-    switch (s.k)
-    {
+void shape_Out(shape& s, ofstream& ofst) {
+    switch (s.k) {
     case shape::key::CCOMPLEX:
         complex_Out(s.c, ofst);
         break;
@@ -194,53 +192,45 @@ void shape_Out(shape& s, ofstream& ofst)
         ofst << "Incorrect numbers!" << endl;
     }
 }
-// Ââîä ñîäåðæèìîãî êîíòåéíåðà èç óêàçàííîãî ïîòîêà
-void container_In(container& c, ifstream& ifst)
-{
-
-    while (!ifst.eof())
-    {
-        if ((c.cont[c.len] = shape_In(ifst)) != 0)
-        {
+    
+// Ввод содержимого контейнера
+void container_In(container& c, ifstream& ifst) {
+    while (!ifst.eof()) {
+        if ((c.cont[c.len] = shape_In(ifst)) != 0) {
             c.len++;
-            if (c.len == when_c_is_full)
-            {
+            if (c.len == when_c_is_full) {
                 cout << "Container is full" << endl;
                 break;
             }
         }
     }
 }
-// вывод только первого ключа
-void OutComplex(container& c, ofstream& ofst)
-{
+    
+// Вывод только первого ключа
+void OutComplex(container& c, ofstream& ofst) {
     ofst << "Only Complex." << endl;
     cout << "Only Complex." << endl;
-    for (int i = 0; i < c.len; i++)
-    {
+    for (int i = 0; i < c.len; i++) {
         ofst << i << ": ";
         cout << i << ": ";
         //Включение вывода приведения чисел к действительному числу, при вызове функции OnlyComplex
-        if (c.cont[i]->k == shape::CCOMPLEX)
-        {
+        if (c.cont[i]->k == shape::CCOMPLEX) {
             shape_Out(*(c.cont[i]), ofst);
             ofst << "Real equivalent = " << Real(*c.cont[i]) << endl;
             cout << "Real equivalent = " << Real(*c.cont[i]) << endl;
         }
-        else
-        {
+        else {
             ofst << endl;
             cout << endl;
         }
     }
 }
-// Âûâîä ñîäåðæèìîãî êîíòåéíåðà â óêàçàííûé ïîòîê
-void container_Out(container& c, ofstream& ofst)
-{
+    
+// вывод содержимого контейнера в указанный поток
+void container_Out(container& c, ofstream& ofst) {
     ofst << "Container contains " << c.len << " elements." << endl;
     cout << "Container contains " << c.len << " elements." << endl;
-    for (int i = 0; i < c.len; i++)
-    {
+    for (int i = 0; i < c.len; i++) {
         ofst << i << ": ";
         cout << i << ": ";
         shape_Out(*(c.cont[i]), ofst);
