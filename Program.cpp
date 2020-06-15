@@ -5,7 +5,23 @@ using namespace std;
 // Ââîä ïàðàìåòðîâ îáîáùåííîé ôèãóðû èç ôàéëà
 void complex_In(ccomplex& c, ifstream& ifst)
 {
-    ifst >> c.real >> c.imag;
+    bool flag = 1;
+    ifst >> c.real;
+    if (ifst.fail())
+        flag = 0;
+    if (ifst.eof())
+        flag = 0;
+    if (c.real <= 0)
+        flag = 0;
+    ifst >> c.imag;
+    if(c.imag <= 0)
+        flag = 0;
+    if (ifst.fail())
+        flag = 0;
+    if (ifst.eof())
+        flag = 0;
+    if (flag == 0) {
+        cout << "\nError input comlex numbers" << endl;
 }
 void complex_Out(ccomplex& c, ofstream& ofst)
 {
@@ -19,7 +35,24 @@ double real_complex(ccomplex& c)
 }
 void fractions_In(fractions& f, ifstream& ifst)
 {
-    ifst >> f.x >> f.y;
+    bool flag = 1;
+    ifst >> f.x;
+    if (ifst.fail())
+        flag = 0;
+    if (ifst.eof())
+        flag = 0;
+    if (f.x <= 0)
+        flag = 0;
+    ifst >> f.y;
+    if (ifst.fail())
+        flag = 0;
+    if (ifst.eof())
+        flag = 0;
+    if (f.y <= 0)
+        flag = 0;
+    if (flag == 0) {
+        cout << "\n\n\nError input fractions numbers" << endl << endl << endl;
+    }
 }
 void fractions_Out(fractions& f, ofstream& ofst)
 {
@@ -28,7 +61,24 @@ void fractions_Out(fractions& f, ofstream& ofst)
 }
 void coordinates_In(polar_coordinates& p, ifstream& ifst)
 {
-    ifst >> p.angle >> p.distance;
+    bool flag = 1;
+    ifst >> p.angle;
+    if (ifst.fail())
+        flag = 0;
+    if (ifst.eof())
+        flag = 0;
+    if (p.angle <= 0)
+        flag = 0;
+    ifst >> p.distance;
+    if (ifst.fail())
+        flag = 0;
+    if (ifst.eof())
+        flag = 0;
+    if (p.distance <= 0)
+        flag = 0;
+    if (flag == 0) {
+        cout << "\n\n\nError input polar coordinates" << endl << endl << endl;
+    }
 }
 void coordinates_Out(polar_coordinates& p, ofstream& ofst)
 {
