@@ -23,7 +23,8 @@ struct shape {
     // значения ключей для каждой из фигур
     enum key { CCOMPLEX, FRACTIONS, POLAR};
     key k; // ключ
-    union // используем прямое включение {
+    // используем прямое включение
+    union  {
         ccomplex c;
         fractions f;
         polar_coordinates p;
